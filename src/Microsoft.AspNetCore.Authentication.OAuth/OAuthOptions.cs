@@ -6,6 +6,7 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -70,5 +71,7 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ISystemClock SystemClock { get; set; } = new SystemClock();
+
+        public ILoggerFactory LoggerFactory { get; set; }
     }
 }

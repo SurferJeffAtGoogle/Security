@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth
 {
@@ -132,6 +133,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                 { "code", code },
                 { "grant_type", "authorization_code" },
             };
+            if (Options.LoggerFactory != null)
+                Options.LoggerFactory.CreateLogger<OAuthHandler<TOptions>>().LogError("137 redirect_uri: {0}", redirectUri);
 
             var requestContent = new FormUrlEncodedContent(tokenRequestParameters);
 
@@ -210,6 +213,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
                 { "redirect_uri", redirectUri },
                 { "state", state },
             };
+            if (Options.LoggerFactory != null)
+                Options.LoggerFactory.CreateLogger<OAuthHandler<TOptions>>().LogError("271 redirect_uri: {0}", redirectUri);
             return Options.AuthorizationEndpoint + queryBuilder.ToString();
         }
 
